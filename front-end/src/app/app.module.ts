@@ -7,12 +7,12 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from "./services/auth.service";
-import {HttpModule} from "@angular/http";
 import {AccountService} from "./services/account.service";
 import { ProfileComponent } from './components/profile/profile.component';
 import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -21,11 +21,9 @@ import {UrlPermission} from "./urlPermission/url.permission";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-
-
   ],
   imports: [
-    BrowserModule,HttpModule,FormsModule,routing, FacebookModule.forRoot(),
+    BrowserModule,HttpClientModule,FormsModule,routing, FacebookModule.forRoot(),
   ],
   providers: [AuthService,AccountService,UrlPermission],
   bootstrap: [AppComponent]

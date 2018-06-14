@@ -12,24 +12,15 @@ import {Router} from "@angular/router";
 export class ProfileComponent implements OnInit {
   currentUser: User;
   constructor(public authService: AuthService, public router: Router) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-
   }
 
   ngOnInit() {
   }
 
-// login out from the app
   logOut() {
-    localStorage.clear();
-    this.authService.logOut()
-      .subscribe(
-        data => {
-          this.router.navigate(['/login']);
-        },
-        error => {
+    console.log('dupa');
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
 
-        });
   }
 }
