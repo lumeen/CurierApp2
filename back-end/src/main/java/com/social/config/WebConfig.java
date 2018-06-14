@@ -52,6 +52,16 @@ import com.social.services.AppUserDetailsService;
 				.passwordEncoder(passwordEncoder());
 		}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+
+			}
+		};
+	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder(){
@@ -77,6 +87,7 @@ import com.social.services.AppUserDetailsService;
 
 				.authorizeRequests()
 				.antMatchers("/login/**", "/register/**", "/logout").permitAll()
+				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 				.anyRequest().authenticated();
 
 			// Custom JWT based security filter

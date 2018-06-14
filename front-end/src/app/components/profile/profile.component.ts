@@ -18,9 +18,18 @@ export class ProfileComponent implements OnInit {
   }
 
   logOut() {
-    console.log('dupa');
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
+
+  }
+
+  getTest(){
+    this.authService.test().subscribe(
+      date=>{
+      console.log(date);
+    },
+    error =>console.log(error),
+    )
 
   }
 }

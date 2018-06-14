@@ -66,6 +66,10 @@ public class AccountController {
 		return ResponseEntity.ok(new JwtAuthenticationResponse(token));
 	}
 
+	@CrossOrigin
+	@RequestMapping(value = "/test", method = RequestMethod.POST)
+	public ResponseEntity<String> user( @RequestBody Object object) {
+	return ResponseEntity.ok("Dupa");
+	}
 
-	
 }
