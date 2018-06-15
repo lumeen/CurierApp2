@@ -17,18 +17,18 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  logOut() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-
-  }
 
   getTest(){
     this.authService.test().subscribe(
       date=>{
-      console.log(date);
+        console.log('odp');
     },
-    error =>console.log(error),
+
+    error =>{
+      localStorage.removeItem('token');
+      this.router.navigate(['/login']);
+
+    }
     )
 
   }

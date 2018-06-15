@@ -1,8 +1,6 @@
 package com.social.config;
 
 
-
-
 import com.social.security.JwtAuthenticationEntryPoint;
 import com.social.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +17,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
@@ -40,28 +41,32 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }
-
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
         return new JwtAuthenticationTokenFilter();
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = new
+            UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        return source;
+    }
 
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-            // we don't need CSRF because our token is invulnerable
-            .csrf().disable()
 
+            .csrf().disable()
             .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 
-            // don't create session
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 
             .authorizeRequests()
@@ -69,11 +74,9 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .anyRequest().authenticated();
 
-        // Custom JWT based security filter
         httpSecurity
             .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
-        // disable page caching
         httpSecurity.headers().cacheControl();
     }
 }

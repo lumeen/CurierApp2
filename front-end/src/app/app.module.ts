@@ -13,6 +13,8 @@ import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {HttpClientModule} from "@angular/common/http";
+import {HeaderComponent} from "./components/header/header.component";
+
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,HttpClientModule,FormsModule,routing, FacebookModule.forRoot(),

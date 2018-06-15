@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.services.UserService;
@@ -67,9 +68,10 @@ public class AccountController {
 	}
 
 	@CrossOrigin
-	@RequestMapping(value = "/test", method = RequestMethod.POST)
-	public ResponseEntity<String> user( @RequestBody Object object) {
-	return ResponseEntity.ok("Dupa");
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	public ResponseEntity<SimpleResponse> user() {
+
+		return ResponseEntity.ok(new SimpleResponse("bb"));
 	}
 
 }

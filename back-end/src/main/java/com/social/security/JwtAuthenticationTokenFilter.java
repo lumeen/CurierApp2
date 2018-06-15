@@ -19,7 +19,7 @@ import java.io.IOException;
 
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
-    private final Log logger = LogFactory.getLog(this.getClass());
+    private final Log loggerr = LogFactory.getLog(this.getClass());
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -35,15 +35,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
 
         String authToken = request.getHeader(this.tokenHeader);
-        // authToken.startsWith("Bearer ")
-        // String authToken = header.substring(7);
+        System.out.println(request.getHeader(this.tokenHeader));
 
         if(authToken != null && authToken.startsWith("Bearer ")) {
             authToken = authToken.substring(7);
         }
 
         String username = jwtTokenUtil.getUsernameFromToken(authToken);
-
 
         logger.info("checking authentication for user " + username);
 
