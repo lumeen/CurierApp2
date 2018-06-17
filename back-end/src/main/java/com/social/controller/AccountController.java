@@ -1,5 +1,9 @@
 package com.social.controller;
 
+import com.social.dao.CarRepository;
+import com.social.dao.CurierRepository;
+import com.social.entities.Car;
+import com.social.entities.Curier;
 import com.social.security.JwtAuthenticationRequest;
 import com.social.security.JwtAuthenticationResponse;
 import com.social.security.JwtTokenUtil;
@@ -32,6 +36,8 @@ public class AccountController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CurierRepository curierRepository;
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
@@ -70,7 +76,6 @@ public class AccountController {
 	@CrossOrigin
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ResponseEntity<SimpleResponse> user() {
-
 		return ResponseEntity.ok(new SimpleResponse("bb"));
 	}
 

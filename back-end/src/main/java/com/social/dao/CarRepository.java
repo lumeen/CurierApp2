@@ -1,4 +1,8 @@
 package com.social.dao;
 
-public interface Car {
+import com.social.entities.Car;
+import com.social.entities.Curier;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CarRepository extends JpaRepository<Car, Long> {
 }
