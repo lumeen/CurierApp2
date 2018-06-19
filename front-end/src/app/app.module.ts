@@ -41,7 +41,7 @@ import { CarPositionComponent } from './components/car-position/car-position.com
   imports: [
     GrowlModule, DialogModule, BrowserAnimationsModule, BrowserModule, HttpClientModule, FormsModule, routing, FacebookModule.forRoot(), NgxDatatableModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyBMmm_Q-BzFlb5Hx-b74uHOA4f2PY9jxXE'
+      apiKey: ''
     })
   ],
   providers: [AuthService, AccountService, UrlPermission, CurierService, MessageService],
