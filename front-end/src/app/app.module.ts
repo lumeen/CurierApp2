@@ -1,20 +1,29 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-
-import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from "./services/auth.service";
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {AppComponent} from './app.component';
+import {LoginComponent} from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {FormsModule} from '@angular/forms';
+import {AuthService} from "./services/auth.service";
 import {AccountService} from "./services/account.service";
-import { ProfileComponent } from './components/profile/profile.component';
+import {ProfileComponent} from './components/profile/profile.component';
 import {routing} from "./app.routing";
 import {FacebookModule} from "ngx-facebook";
 import {UrlPermission} from "./urlPermission/url.permission";
 import {HttpClientModule} from "@angular/common/http";
 import {HeaderComponent} from "./components/header/header.component";
-
+import {CouriersListComponent} from './components/couriers-list/couriers-list.component';
+import {CurierService} from "./services/curier.service";
+import {SharedModule} from "primeng/shared";
+import {DialogModule} from "primeng/dialog";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {GrowlModule} from 'primeng/growl';
+import {MessageService} from "primeng/components/common/messageservice";
+import {CurierComponent} from './components/curier/curier.component';
+import {AgmCoreModule} from "@agm/core";
+import { CarPositionComponent } from './components/car-position/car-position.component';
 
 
 @NgModule({
@@ -24,11 +33,19 @@ import {HeaderComponent} from "./components/header/header.component";
     RegisterComponent,
     ProfileComponent,
     HeaderComponent,
+    CouriersListComponent,
+    CurierComponent,
+    CarPositionComponent,
+
   ],
   imports: [
-    BrowserModule,HttpClientModule,FormsModule,routing, FacebookModule.forRoot(),
+    GrowlModule, DialogModule, BrowserAnimationsModule, BrowserModule, HttpClientModule, FormsModule, routing, FacebookModule.forRoot(), NgxDatatableModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBMmm_Q-BzFlb5Hx-b74uHOA4f2PY9jxXE'
+    })
   ],
-  providers: [AuthService,AccountService,UrlPermission],
+  providers: [AuthService, AccountService, UrlPermission, CurierService, MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,15 +1,59 @@
 <app-header ></app-header>
+<p-growl [(value)]="msgs"></p-growl>
+<button type="button" class="btn btn-primary" (click)="displayAdd = true" style="display: inline-block; margin-left: 20px; width: 140px">Add a curier</button>
+<button type="button" class="btn btn-success" (click)="displaySearch = true" style="display: inline-block; margin-left: 20px; width: 140px">Find a curier</button>
+
+<p-dialog header="Add a curier" [(visible)]="displayAdd" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+
+          [maximizable]="true" [baseZIndex]="10000">
+
+
+  <form>
+    <label>
+      First name
+    </label>
+  <input  id="firstName" name="firstName" #firstName style="display: block">
+  <label>
+      Second name
+    </label>
+    <input  id="secondName" name="secondName" #secondName style="display: block">
+
+  <p-footer style="margin-top: 20px">
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="addCurier(firstName.value, secondName.value)">Add</button>
+    <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displayAdd=false">Cancel</button>
+  </p-footer>
+  </form>
+</p-dialog>
+
+<p-dialog header="Find a curier" [(visible)]="displaySearch" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+
+          [maximizable]="true" [baseZIndex]="10000">
+
+
+  <form>
+    <label>
+      First name
+    </label>
+    <input  id="firstNameSearch" name="firstNameSearch" #firstNameSearch style="display: block">
+    <label>
+      Second name
+    </label>
+    <input  id="secondNameSearch" name="secondNameSearch" #secondNameSearch style="display: block">
+
+    <p-footer style="margin-top: 20px">
+      <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="findCuriers(firstNameSearch.value, secondNameSearch.value)">Searh</button>
+      <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displaySearch=false">Cancel</button>
+    </p-footer>
+  </form>
+</p-dialog>
 
 <div class="container">
 
-  <header class="jumbotron my-4">
-    <h1 class="display-3">  <strong></strong>, Welcome to your app </h1>
-    <p class="lead"> welcome to your profile
-    </p>
-    <div class="row">
-    </div>
-  </header>
-  <button (click)="getTest()" >fdsfsdfsd</button>
+
+  <button *ngIf="!displayAllCuriers" type="button" class="btn btn-warning" (click)="ngOnInit()" style="display: inline-block; margin-left: 1000px; width: 140px; margin-bottom: -250px">Display all curiers</button>
+
+ <app-couriers-list *ngIf="rows" [inputRows]="rows" style="margin-top: 100px"></app-couriers-list>
+
 </div>
 
 
