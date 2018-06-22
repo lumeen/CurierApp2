@@ -44,7 +44,7 @@ this.displayAllCuriers=true;
 
   addCurier(firstName: string, secondName: string){
 
-    this.curierService.saveGroup(new Curier(firstName, secondName)).subscribe(
+    this.curierService.saveGroup(new Curier(firstName, secondName, null)).subscribe(
       date=>{
         this.displayAdd = false;
         this.messageService.add({severity:'success', summary:'Success!', detail:'Currier added'});
@@ -64,7 +64,7 @@ this.displayAllCuriers=true;
   }
 
   findCuriers(firstName:string, secondName:string){
-    this.curierService.findCuriers(new Curier(firstName, secondName)).subscribe(date=>{
+    this.curierService.findCuriers(new Curier(firstName, secondName, null)).subscribe(date=>{
 
       if(date.length == 0)
       {

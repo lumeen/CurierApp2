@@ -24,6 +24,9 @@ import {MessageService} from "primeng/components/common/messageservice";
 import {CurierComponent} from './components/curier/curier.component';
 import {AgmCoreModule} from "@agm/core";
 import { CarPositionComponent } from './components/car-position/car-position.component';
+import {DragDropDirectiveModule} from "angular4-drag-drop";
+import {DragulaModule} from "ng2-dragula";
+import {ParcelService} from "./services/parcel.service";
 
 
 @NgModule({
@@ -39,12 +42,12 @@ import { CarPositionComponent } from './components/car-position/car-position.com
 
   ],
   imports: [
-    GrowlModule, DialogModule, BrowserAnimationsModule, BrowserModule, HttpClientModule, FormsModule, routing, FacebookModule.forRoot(), NgxDatatableModule,
+    DragulaModule,GrowlModule, DialogModule, BrowserAnimationsModule, BrowserModule, HttpClientModule, FormsModule, routing, FacebookModule.forRoot(), NgxDatatableModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyBMmm_Q-BzFlb5Hx-b74uHOA4f2PY9jxXE'
     })
   ],
-  providers: [AuthService, AccountService, UrlPermission, CurierService, MessageService],
+  providers: [AuthService, AccountService, UrlPermission, CurierService, MessageService, ParcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

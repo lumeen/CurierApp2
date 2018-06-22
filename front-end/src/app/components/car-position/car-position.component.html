@@ -1,7 +1,7 @@
-<h1>{{ title }}</h1>
+
 
 <!-- this creates a google map on the page with the given lat/lng from -->
 <!-- the component as the initial center of the map: -->
-<agm-map style="height: 400px; width: 400px" [latitude]="lat" [longitude]="lng">
+<agm-map [zoom] = '12' style="height: 400px; width: 1100px; margin: auto" [latitude]="lat" [longitude]="lng">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
 </agm-map>

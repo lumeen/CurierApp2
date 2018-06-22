@@ -1,6 +1,7 @@
 package com.social.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,13 +29,23 @@ public class Car {
 
     private String registrationNumber;
 
+    private String brand;
+
+    private String model;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "curier_id", nullable = false)
     private Curier curier;
 
-    @OneToOne(fetch = FetchType.LAZY,
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "car")
+    private List<Parcel> parcels;
+
+    @OneToOne(fetch = FetchType.LAZY,
+        cascade =  CascadeType.ALL,
+        mappedBy = "car")
     private Coordinate coordinate;
 }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+
+import {Curier} from "../../model/model.curier";
 
 @Component({
   selector: 'app-car-position',
@@ -6,13 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./car-position.component.css']
 })
 export class CarPositionComponent implements OnInit {
-  title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number ;
+  lng: number ;
 
-  constructor() { }
+  @Input() curier: Curier;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
+    this.lat = this.curier.car.coordinate.latitude;
+    this.lng = this.curier.car.coordinate.longitude;
+
   }
 
 }

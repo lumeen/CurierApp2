@@ -1,1 +1,40 @@
-<app-car-position></app-car-position>
+
+<div>
+<app-car-position  *ngIf="this.curier" [curier]="this.curier"></app-car-position>
+</div>
+
+<div>
+  <div class='wrapper' style="width: 80%; margin: auto; margin-top: 100px">
+<div style="margin-left: 12px; margin-bottom: -24px">
+    <table style="width:100%">
+      <tr>
+        <th>Number</th>
+        <th>Dest. city</th>
+        <th>Dest. street</th>
+        <th>Dest. post code</th>
+
+        <th>Build. number</th>
+        <th>Status</th>
+      </tr>
+    </table>
+</div>
+    <div class='container' [dragula]='"bag-one"'  [dragulaModel]='list' [dragulaOptions]="options" style="display: initial">
+      <div *ngFor="let item of list" style=" height: 50px">
+
+
+<div >
+        <div style="width: 241px; text-align: center; display: inline-block">{{item.id}}</div>
+        <div class="parcel-list">{{item.city}}</div>
+        <div class="parcel-list">{{item.streetName}}</div>
+  <div class="parcel-list">{{item.postCode}}</div>
+  <div class="parcel-list">{{item.buildNumber}}</div>
+  <div class="parcel-list" style="width: 219px" >{{item.status}}</div>
+</div>
+</div>
+      </div>
+    </div>
+
+  <button type="button"   class="btn btn-primary"  (click)="updateParcels()"  style="display: inline-block; margin-right:195px; float: right; width: 140px">Save changes</button>
+
+
+</div>
