@@ -9,7 +9,6 @@ import {Router} from "@angular/router";
 export class HeaderComponent implements OnInit {
 
   constructor(public router: Router) { }
-
   ngOnInit() {
   }
 

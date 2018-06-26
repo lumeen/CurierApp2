@@ -8,5 +8,6 @@ public interface ParcelRepository extends JpaRepository<Parcel, Long> {
 
     List<Parcel> findByIdIn(List<Long> id);
     List<Parcel> findByCarId(Long carId);
+    List<Parcel> findById(Long id);
 
 }

@@ -1,22 +1,4 @@
-Skip to content
 
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-@lumeen
-Sign out
-Watch 391
-Star 17,788  Fork 1,403 bevacqua/dragula
-Code  Issues 135  Pull requests 40  Projects 0  Insights
-Branch: master Find file Copy path dragula/example/example.css
-ee3e3f7  on Jun 9, 2017
-@sayzlim sayzlim Install Carbon
-7 contributors @bevacqua @sayzlim @sethmcleod @Andexus @djhopper01 @elrumordelaluz @daleeidd
-RawBlameHistory
-285 lines (255 sloc)  4.38 KB
 body {
   background-color: #942A57;
   margin: 0 auto;
@@ -35,7 +17,7 @@ html, body {
   box-sizing: inherit;
 }
 
-body, input {
+body {
   font-family: Georgia, Helvetica;
   font-size: 17px;
   color: #ecf0f1;
@@ -121,18 +103,6 @@ ul {
   background-color: rgba(255, 255, 255, 0.2);
   margin: 50px 0;
   padding: 20px;
-}
-
-input {
-  border: none;
-  outline: none;
-  background-color: #ecf0f1;
-  padding: 10px;
-  color: #942A57;
-  border: 0;
-  margin: 5px 0;
-  display: block;
-  width: 100%;
 }
 
 

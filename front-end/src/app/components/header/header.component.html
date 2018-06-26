@@ -1,14 +1,15 @@
-<nav  class="navbar navbar-inverse">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 40px">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/profile">Couriers list <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" routerLinkActive="active"  routerLink="/parcels">Parcels list</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <i class="fa fa-sign-out" title="Log out" style="font-size: 40px; color: white; cursor: pointer; float:right; margin-left: 1500px" aria-hidden="true" (click)="logOut()" ></i>
+    </div>
 
-    <ul class="nav navbar-nav">
-      <li class="active"  ><a>Curier list</a></li>
-      <li class="active"  ><a>Bags list</a></li>
 
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-
-      <li class="log-out" style="cursor: pointer"(click)="logOut()"><span class="glyphicon glyphicon-log-in" ></span> LogOut</li>
-    </ul>
   </div>
 </nav>

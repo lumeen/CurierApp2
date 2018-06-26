@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Courier} from "../../model/model.courier";
 
-import {Curier} from "../../model/model.curier";
+
 
 @Component({
   selector: 'app-car-position',
@@ -11,15 +12,15 @@ export class CarPositionComponent implements OnInit {
   lat: number ;
   lng: number ;
 
-  @Input() curier: Curier;
+  @Input() courier: Courier;
 
   constructor() {
 
   }
 
   ngOnInit() {
-    this.lat = this.curier.car.coordinate.latitude;
-    this.lng = this.curier.car.coordinate.longitude;
+    this.lat = this.courier.car.coordinate.latitude;
+    this.lng = this.courier.car.coordinate.longitude;
 
   }
 

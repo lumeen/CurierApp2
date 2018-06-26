@@ -1,3 +1,9 @@
+body{
+  background-color:rgb(224,224,224)
+  !important;
+
+}
+
 .ngx-datatable.bootstrap {
   box-shadow: none;
   font-size: 13px;
@@ -12,6 +18,7 @@
 }
 .ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label {
   line-height: 24px;
+  color: white;
 }
 .ngx-datatable.bootstrap .datatable-body {
 
@@ -67,6 +74,11 @@
   vertical-align: bottom;
   color: #ededed;
 }
+
+.ui-growl {
+  z-index: 999900 !important;
+}
+
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-left,
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-skip,
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager .datatable-icon-right,
@@ -76,12 +88,16 @@
   padding: 0 3px;
 }
 .ngx-datatable.bootstrap .datatable-header {
-  background-color: grey;
+  background-color: #00263a;
   height: unset !important;
 }
 
 .datatable-body-row:hover {
   background-color: red !important;
+}
+
+button{
+  cursor: pointer;
 }
 
 /* You can add global styles to this file, and also import other style files */

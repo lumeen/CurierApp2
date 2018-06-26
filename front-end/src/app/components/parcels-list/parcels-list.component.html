@@ -1,0 +1,70 @@
+<app-header></app-header>
+
+<p-growl [(value)]="msgs"></p-growl>
+<button type="button" class="btn btn-primary" (click)="displayAdd = true" style="display: inline-block; margin-left: 20px; width: 140px">Add a parcel</button>
+<button type="button" class="btn btn-success" (click)="displaySearch = true" style="display: inline-block; margin-left: 20px; width: 140px">Find a pacrcel</button>
+
+<p-dialog header="Add a parcel" [(visible)]="displayAdd" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+
+          [maximizable]="true" [baseZIndex]="10000">
+
+
+  <form [formGroup]="formGroup"  (ngSubmit)="onSubmit(formGroup)">
+    <label>
+     City
+    </label>
+    <input   formControlName="city" id="city" name="city" #city style="display: block" minlength="1" maxlength="50">
+    <label>
+      Post code
+    </label>
+    <input formControlName="postCode" id="postCode" name="postCode" #postCode style="display: block">
+    <label>
+      Street
+    </label>
+    <input  formControlName="streetName" id="streetName" name="streetName" #streetName style="display: block">
+    <label>
+      Build nr.
+    </label>
+    <input formControlName="buildNumber" id="buildNumber" name="buildNumber" #buildNumber style="display: block">
+    <p-footer style="margin-top: 20px">
+      <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" >Add</button>
+      <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displayAdd=false">Cancel</button>
+    </p-footer>
+  </form>
+</p-dialog>
+
+<p-dialog header="Find a parcel" [(visible)]="displaySearch" [modal]="true" [responsive]="true" [width]="350" [minWidth]="200" [minY]="70"
+
+          [maximizable]="true" [baseZIndex]="10000">
+
+
+  <form>
+    <label>
+      Parcel number
+    </label>
+    <input  id="parcelNumber" name="parcelNumber" #parcelNumber style="display: block">
+
+
+    <p-footer style="margin-top: 20px">
+      <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="findParcel(parcelNumber.value)">Searh</button>
+      <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displaySearch=false">Cancel</button>
+    </p-footer>
+  </form>
+</p-dialog>
+
+
+<div class="container">
+  <button *ngIf="!displayAllParcels" type="button" class="btn btn-warning" (click)="ngOnInit()" style="display: inline-block; margin-left: 950px; width: 160px; margin-bottom: -250px">Display all parcels</button>
+<ngx-datatable
+  class="bootstrap"
+  [rows]="parcels"
+  [limit]="5"
+  [columns]="columns"
+  [columnMode]="'force'"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  [rowHeight]="'auto'"
+  [reorderable]="reorderable"
+  style="margin-top: 150px">
+</ngx-datatable>
+</div>

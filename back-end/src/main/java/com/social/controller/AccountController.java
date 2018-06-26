@@ -1,9 +1,6 @@
 package com.social.controller;
 
-import com.social.dao.CarRepository;
-import com.social.dao.CurierRepository;
-import com.social.entities.Car;
-import com.social.entities.Curier;
+import com.social.dao.CourierRepository;
 import com.social.security.JwtAuthenticationRequest;
 import com.social.security.JwtAuthenticationResponse;
 import com.social.security.JwtTokenUtil;
@@ -22,7 +19,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.social.services.UserService;
@@ -37,7 +33,7 @@ public class AccountController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private CurierRepository curierRepository;
+	private CourierRepository curierRepository;
 	@Autowired
 	private AuthenticationManager authenticationManager;
 

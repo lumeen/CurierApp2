@@ -1,29 +1,37 @@
-import { Component, OnInit } from '@angular/core';
-import {CurierService} from "../../services/curier.service";
-import {Curier} from "../../model/model.curier";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+
+
+
 import {ActivatedRoute} from "@angular/router";
 import {DragulaService} from "ng2-dragula";
 import {ParcelService} from "../../services/parcel.service";
 import {MessageService} from "primeng/components/common/messageservice";
 import {Message} from "primeng/components/common/api";
+import {Courier} from "../../model/model.courier";
+import {CourierService} from "../../services/courier.service";
 
 @Component({
-  selector: 'app-curier',
-  templateUrl: './curier.component.html',
-  styleUrls: ['./curier.component.css']
-})
-export class CurierComponent implements OnInit {
+  selector: 'app-courier',
+  templateUrl: './courier.component.html',
+  styleUrls: ['./courier.component.css'],
 
-  curier: Curier;
+})
+export class CourierComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.dragulaService.destroy('bag-one')
+  }
+
+  courier: Courier;
   list: any[];
-  startList: any[];
+  disabled:boolean = true;
+  displaySearch: boolean = false;
   options: any = {
     removeOnSpill: true
   };
   msgs: Message[] = [];
 
 
-  constructor(private messageService: MessageService, private parcelService: ParcelService,private dragulaService: DragulaService, private curierService: CurierService, private route: ActivatedRoute) {
+  constructor(private messageService: MessageService, private parcelService: ParcelService,private dragulaService: DragulaService, private courierService: CourierService, private route: ActivatedRoute) {
     dragulaService.setOptions('bag-one', {
       removeOnSpill: true
     });
@@ -40,18 +48,21 @@ export class CurierComponent implements OnInit {
     dragulaService.out.subscribe((value) => {
       this.onOut(value.slice(1));
     });
+    dragulaService.remove.subscribe((value) => {
+      this.onRemove(value.slice(1));
+    });
   }
 
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
 
-    this.curierService.getCurier(+id).subscribe(data => {
+    this.courierService.getCourier(+id).subscribe(data => {
 
-        this.curier = data;
+        this.courier = data;
         console.log(data);
 
-  this.parcelService.getParcelsByCarId( +this.curier.car.id).subscribe(r =>{
+  this.parcelService.getParcelsByCarId( +this.courier.car.id).subscribe(r =>{
     this.list = r;
   })
 
@@ -82,7 +93,11 @@ export class CurierComponent implements OnInit {
     this.removeClass(e, 'ex-moved');
   }
 
+  private onRemove(args) {
+    this.disabled=false;
+  }
   private onDrop(args) {
+    this.disabled=false;
     let [e, el] = args;
     this.addClass(e, 'ex-moved');
 
@@ -100,11 +115,28 @@ export class CurierComponent implements OnInit {
 
   updateParcels(){
    this.parcelService.updateParcels(this.list).subscribe(data =>{
-
-
      this.messageService.add({severity:'success', summary:'Changes saved!'});
+     this.parcelService.getParcelsByCarId( +this.courier.car.id).subscribe(r =>{
+       this.list = r;
+     });
+     this.disabled=true;
    })
   }
+
+  addParcel(courierId: number, parcelId: number){
+    this.courierService.addParcel(courierId,parcelId).subscribe(data=>{
+this.ngOnInit();
+      this.messageService.add({severity:'success', summary:'Parcel added!'})
+    },
+      error => {
+        this.displaySearch = false;
+        this.messageService.add({severity:'warning', summary:'Parcel does not exists or parcel in transport'})
+      },
+    () => {this.displaySearch = false;}
+
+
+    )
+}
 }
 
 

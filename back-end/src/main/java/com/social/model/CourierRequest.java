@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurierRequest {
+public class CourierRequest {
 
     private String firstName;
     private String secondName;
+    private String phoneNumber;
 
 }

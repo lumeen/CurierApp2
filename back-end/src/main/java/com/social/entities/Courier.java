@@ -16,7 +16,7 @@ import lombok.Value;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Curier implements Serializable {
+public class Courier implements Serializable {
 
     private static final long serialVersionUID = -1319441825834536307L;
 
@@ -28,7 +28,8 @@ public class Curier implements Serializable {
 
     private String secondName;
 
-    private String fullName;
+    private String phoneNumber;
+
 
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,

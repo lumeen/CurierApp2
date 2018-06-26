@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CurierService} from "../../services/curier.service";
+;
 import {Router} from "@angular/router";
-import {Curier} from "../../model/model.curier";
 import {Message} from "primeng/components/common/api";
 import {MessageService} from "primeng/components/common/messageservice";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CourierService} from "../../services/courier.service";
 
 @Component({
   selector: 'app-couriers-list',
@@ -12,21 +13,26 @@ import {MessageService} from "primeng/components/common/messageservice";
 })
 export class CouriersListComponent implements OnInit {
  @Input() inputRows ;
+  @Input() group: FormGroup;
+
   msgs: Message[] = [];
   columns = [
+    { prop: 'id' , name: "ID"},
     { prop: 'firstName' , name: "First Name"},
     { name: 'Second name' , prop: "secondName"},
+    { name: 'Phone' , prop: "phoneNumber"},
   ];
-  constructor(private messageService: MessageService,private curierService: CurierService, private router: Router) { }
+  constructor(private messageService: MessageService,private courierService: CourierService, private router: Router) { }
 
   ngOnInit() {
+
 
   }
   activate(event) {
 
     if (event.type == "click" ) {
       console.log(event.row.id);
-      this.router.navigateByUrl(`profile/curier/${event.row.id}`);
+      this.router.navigateByUrl(`/courier/${event.row.id}`);
     }
   }
 

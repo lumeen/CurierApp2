@@ -8,18 +8,24 @@
           [maximizable]="true" [baseZIndex]="10000">
 
 
-  <form>
+  <form [formGroup]="formGroup"  (ngSubmit)="onSubmit(formGroup)">
     <label>
       First name
     </label>
-  <input  id="firstName" name="firstName" #firstName style="display: block">
+  <input formControlName="firstName" id="firstName" name="firstName" #firstName style="display: block">
   <label>
       Second name
     </label>
-    <input  id="secondName" name="secondName" #secondName style="display: block">
+    <input formControlName="secondName" id="secondName" name="secondName" #secondName style="display: block">
+
+
+    <label>
+      Phone number
+    </label>
+    <input formControlName="phoneNumber" id="phoneNumber" name="phoneNumber" #phoneNuumber style="display: block">
 
   <p-footer style="margin-top: 20px">
-    <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="addCurier(firstName.value, secondName.value)">Add</button>
+    <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right">Add</button>
     <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displayAdd=false">Cancel</button>
   </p-footer>
   </form>
@@ -34,14 +40,14 @@
     <label>
       First name
     </label>
-    <input  id="firstNameSearch" name="firstNameSearch" #firstNameSearch style="display: block">
+    <input formControlName id="firstNameSearch" name="firstNameSearch" #firstNameSearch style="display: block">
     <label>
       Second name
     </label>
     <input  id="secondNameSearch" name="secondNameSearch" #secondNameSearch style="display: block">
 
     <p-footer style="margin-top: 20px">
-      <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="findCuriers(firstNameSearch.value, secondNameSearch.value)">Searh</button>
+      <button type="submit" class="btn btn-success" style="margin-top: 20px; float: right" (click)="findCuriers(firstNameSearch.value, secondNameSearch.value)">Search</button>
       <button type="button" class="btn btn-danger" style="margin-top: 20px; margin-right: 20px; float: right" (click)="displaySearch=false">Cancel</button>
     </p-footer>
   </form>
