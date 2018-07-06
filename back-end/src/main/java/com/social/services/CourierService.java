@@ -1,8 +1,12 @@
 package com.social.services;
 
+import com.social.dao.CarRepository;
 import com.social.dao.CourierRepository;
+import com.social.entities.Car;
+import com.social.entities.Coordinate;
 import com.social.entities.Courier;
 import com.social.entities.Parcel;
+import com.social.model.CoordsUpdateRequest;
 import com.social.model.CourierRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class CourierService {
 
     private final CourierRepository courierRepository;
+    private final CarRepository carRepository;
     private final ParcelService parcelService;
 
     public void createCourier(CourierRequest curierRequest) {
@@ -62,7 +67,16 @@ public class CourierService {
             }
 
         }
-return  courier;
+        return courier;
+    }
+
+    public void updateCoords(CoordsUpdateRequest coordsUpdateRequest) {
+
+        Car car = courierRepository.findByEmail(coordsUpdateRequest.getUserName()).getCar();
+        car.getCoordinate().setLatitude(Double.valueOf(coordsUpdateRequest.getLatitude()));
+        car.getCoordinate().setLongitude(Double.valueOf(coordsUpdateRequest.getLongitude()));
+        carRepository.save(car);
+
     }
 
 

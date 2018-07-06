@@ -70,6 +70,20 @@ public class AccountController {
 	}
 
 	@CrossOrigin
+	@RequestMapping(method = RequestMethod.POST, value = "/loginMob")
+	public ResponseEntity<?> loginMobile(JwtAuthenticationRequest authenticationRequest) {
+		final Authentication authentication = authenticationManager.authenticate(new
+			UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest
+			.getPassword()));
+
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		final UserDetails userDetails = this.userService.find(authenticationRequest.getUsername());
+		final java.lang.String token = this.jwtTokenUtil.generateToken(userDetails);
+		System.out.println(token);
+		return ResponseEntity.ok(new JwtAuthenticationResponse(token));
+	}
+
+	@CrossOrigin
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ResponseEntity<SimpleResponse> user() {
 		return ResponseEntity.ok(new SimpleResponse("bb"));

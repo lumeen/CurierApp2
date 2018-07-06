@@ -28,6 +28,8 @@ public class Courier implements Serializable {
 
     private String secondName;
 
+    private String email;
+
     private String phoneNumber;
 
 

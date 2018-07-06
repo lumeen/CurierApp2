@@ -15,4 +15,6 @@ public interface CourierRepository extends JpaRepository<Courier, Long> {
         @Param("secondName") String secondName);
 
     Courier findById(Long id);
+
+    Courier findByEmail(String email);
 }

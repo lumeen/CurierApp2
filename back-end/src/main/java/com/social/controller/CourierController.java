@@ -2,10 +2,12 @@ package com.social.controller;
 
 import com.social.entities.Courier;
 import com.social.model.AddParcelToCourierRequest;
+import com.social.model.CoordsUpdateRequest;
 import com.social.model.CourierRequest;
 import com.social.services.CourierService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,5 +53,10 @@ public class CourierController {
         return ResponseEntity.ok(courierService.addParcelToCourier(addParcelToCourierRequest.getCourierId(),addParcelToCourierRequest.getParcelId()));
     }
 
-
+    @CrossOrigin
+    @RequestMapping(value = "/courier/updateCoords", method = RequestMethod.POST
+    )
+    public void addParcelToCourier ( CoordsUpdateRequest coordsUpdateRequest) {
+       courierService.updateCoords(coordsUpdateRequest);
+    }
 }
