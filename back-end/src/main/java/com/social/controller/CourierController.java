@@ -50,13 +50,7 @@ public class CourierController {
     @CrossOrigin
     @RequestMapping(value = "/courier/addParcel", method = RequestMethod.POST)
     public ResponseEntity<Courier> addParcelToCourier (@RequestBody AddParcelToCourierRequest addParcelToCourierRequest) {
-        return ResponseEntity.ok(courierService.addParcelToCourier(addParcelToCourierRequest.getCourierId(),addParcelToCourierRequest.getParcelId()));
+        return ResponseEntity.ok(courierService.addParcelToCourier( addParcelToCourierRequest.getParcelId(), addParcelToCourierRequest.getCourierId()));
     }
 
-    @CrossOrigin
-    @RequestMapping(value = "/courier/updateCoords", method = RequestMethod.POST
-    )
-    public void addParcelToCourier ( CoordsUpdateRequest coordsUpdateRequest) {
-       courierService.updateCoords(coordsUpdateRequest);
-    }
 }

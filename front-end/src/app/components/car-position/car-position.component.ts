@@ -19,8 +19,10 @@ export class CarPositionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.lat = this.courier.car.coordinate.latitude;
-    this.lng = this.courier.car.coordinate.longitude;
+    console.log(this.courier);
+    this.lng = this.courier.car.coordinate.latitude;
+    this.lat = this.courier.car.coordinate.longitude;
+
 
   }
 

@@ -3,10 +3,12 @@ package com.social.entities;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import java.util.Date;
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,9 +21,10 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Table(name="users")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public  class User implements UserDetails{
 
-	public static enum Role{ USER }
+
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -37,15 +40,22 @@ public  class User implements UserDetails{
 
     private String fullName;
 
-    public User(){
-    	
-    }
-    
-    public User(String username,String password,String fullName){
-    	this.username=username;
-    	this.password= password;
-    	this.fullName=fullName;
-    }
+	private String nfcTag;
+
+	private Integer maxWeight;
+	private Integer saldo;
+
+	private String status;
+
+	private Date startActive;
+
+	private Date endActive;
+
+	private Double lat;
+	private Double lng;
+	private String phone;
+
+
 	@JsonIgnore
 	@Override
 	public boolean isEnabled() {

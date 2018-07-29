@@ -33,6 +33,8 @@ public class Courier implements Serializable {
     private String phoneNumber;
 
 
+
+
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
             mappedBy = "curier")

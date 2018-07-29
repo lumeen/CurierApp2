@@ -25,16 +25,31 @@ public class Parcel implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    private String city;
+/*    private String city;
 
     private String postCode;
 
     private String streetName;
 
-    private String buildNumber;
+    private String buildNumber;*/
 
     private String status;
-@Setter
+
+    private Double startLat;
+
+    private Double startLng;
+    private Double endLat;
+
+    private Double endLng;
+
+
+    private String startPlaceId;
+    private String endPlaceId;
+    private Long weight;
+    private String startPhone ;
+    private String endPhone ;
+    private Long courierId;
+    @Setter
     private Integer priority;
 
     @ManyToOne(fetch = FetchType.LAZY)

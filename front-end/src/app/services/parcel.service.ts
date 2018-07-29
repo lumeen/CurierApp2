@@ -13,34 +13,38 @@ export class ParcelService {
   }
 
   private readonly PARCEL_URL = "http://localhost:8080/parcel";
+  private readonly GOOGLE_API = "https://maps.googleapis.com/maps/api/geocode/json?"
+  private readonly KEY = "AIzaSyBMmm_Q-BzFlb5Hx-b74uHOA4f2PY9jxXE";
 
   public updateParcels(parcels: Parcel[]) {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
 
-    return this.http.put<any>(AppComponent.API_URL + '/parcels/update', parcels, {headers:headers}
+    return this.http.put<any>(AppComponent.API_URL + '/parcels/update', parcels, {headers: headers}
     );
   }
 
-  public getParcelsByCarId( carId : number): Observable<any>{
+  public getParcelsByCarId(carId: number): Observable<any> {
 
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.post<any>(AppComponent.API_URL+ '/parcels/byCarId', carId, {headers: headers})
+    return this.http.post<any>(AppComponent.API_URL + '/parcels/byCarId', carId, {headers: headers})
   }
 
-  public getAll(): Observable<any>{
+  public getAll(): Observable<any> {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<any>(AppComponent.API_URL+ '/parcels/getAll', {headers: headers})
+    return this.http.get<any>(AppComponent.API_URL + '/parcels/getAll', {headers: headers})
   }
-
 
 
   public createParcel(parcel: ParcelReq): Observable<ParcelReq> {
+console.log(parcel);
+
+
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
@@ -51,7 +55,7 @@ export class ParcelService {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Access-Control-Allow-Origin', '*');
     headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('token'));
-    return this.http.get<Parcel[]>(this.PARCEL_URL + '/' + id,{headers:headers});
+    return this.http.get<Parcel[]>(this.PARCEL_URL + '/' + id, {headers: headers});
   }
 
 }

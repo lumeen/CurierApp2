@@ -1,10 +1,15 @@
 package com.social.controller;
 
 import com.social.dao.CourierRepository;
+import com.social.model.AvailabilityRequest;
+import com.social.model.CoordsUpdateRequest;
+import com.social.model.VerifyNfcRequest;
 import com.social.security.JwtAuthenticationRequest;
 import com.social.security.JwtAuthenticationResponse;
 import com.social.security.JwtTokenUtil;
 
+
+import org.apache.commons.text.StringEscapeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,9 +89,44 @@ public class AccountController {
 	}
 
 	@CrossOrigin
+	@RequestMapping(value = "/verifyNfc", method = RequestMethod.PUT)
+	public ResponseEntity<?> verifyNfc(VerifyNfcRequest verifyNfcRequest) {
+		return userService.verifyNfc(verifyNfcRequest) ? new ResponseEntity(HttpStatus.OK) : new ResponseEntity(HttpStatus.BAD_REQUEST);
+	}
+
+	@CrossOrigin
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public ResponseEntity<SimpleResponse> user() {
 		return ResponseEntity.ok(new SimpleResponse("bb"));
 	}
 
+    @CrossOrigin
+    @RequestMapping(value = "/availability", method = RequestMethod.PUT)
+    public ResponseEntity<?> setAvailability(AvailabilityRequest availabilityRequest) {
+
+userService.setAvailability(availabilityRequest);
+
+        return ResponseEntity.ok("");
+    }
+
+	@CrossOrigin
+	@RequestMapping(value = "/courier/updateCoords", method = RequestMethod.POST
+	)
+	public void addParcelToCourier ( CoordsUpdateRequest coordsUpdateRequest) {
+userService.updateCourierCoords(coordsUpdateRequest);
+	}
+
+	@CrossOrigin
+	@RequestMapping(value = "/getSaldo", method = RequestMethod.POST
+	)
+	public String getSaldo (String userName) {
+		return userService.getSaldo(userName);
+	}
+
+	@CrossOrigin
+	@RequestMapping(value = "/setCourierReady", method = RequestMethod.PUT
+	)
+	public void setCourierReady (String userName) {
+		 userService.setCourierReady(userName);
+	}
 }
