@@ -64,8 +64,8 @@ public class ParcelController {
 
     @CrossOrigin
     @RequestMapping(value = "/parcel/verify", method = RequestMethod.PUT)
-    public void verifyParcel( ParcelVerifyRequest parcelRequest) throws InterruptedException {
-        parcelService.verify(parcelRequest);
+    public boolean verifyParcel( ParcelVerifyRequest parcelRequest) throws InterruptedException {
+ return parcelService.verify(parcelRequest);
 
     }
 
