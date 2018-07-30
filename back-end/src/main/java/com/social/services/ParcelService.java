@@ -112,7 +112,7 @@ public class ParcelService {
 
     private boolean findCourierForParcel(Parcel parcel) {
 
-        List<User> activeCouriers = userService.findAll().stream().filter(r -> r.getStatus().equals("READY") && Long.valueOf(r.getMaxWeight())<=parcel.getWeight())
+        List<User> activeCouriers = userService.findAll().stream().filter(r -> r.getStatus().equals("READY") && Long.valueOf(r.getMaxWeight())>= parcel.getWeight())
             .collect(Collectors.toList());
         List<CourierWithDistanceToParcel> courierWithDistanceToParcels = activeCouriers.stream().
             map(c -> new CourierWithDistanceToParcel(c.getId(),
