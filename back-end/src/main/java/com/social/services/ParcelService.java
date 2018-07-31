@@ -73,7 +73,7 @@ public class ParcelService {
 
     }
 
-    public boolean verify(ParcelVerifyRequest parcelVerifyRequest) throws InterruptedException {
+    public void verify(ParcelVerifyRequest parcelVerifyRequest) throws InterruptedException {
         List<Parcel> a = parcelRepository.findByStartPhoneAndEndPhoneAndStatus(parcelVerifyRequest.getStartPhone(),
             parcelVerifyRequest.getEndPhone(), "unverified");
         Parcel parcel = parcelRepository.findByStartPhoneAndEndPhoneAndStatus(parcelVerifyRequest.getStartPhone(),
@@ -89,13 +89,12 @@ public class ParcelService {
                     new Date().toString() +'\n'+ ": Parcel was verified"));
             androidPushNotificationsService.send(notificationProvider
                 .createNotification(reciver.getUsername(), "Parcel not verified", "You have new parcel: start",
-                    new Date().toString() +'\n'+ "You verified parcel"));
+                    new Date().toString() +'\n'+ ": You verified parcel"));
             parcelRepository.save(parcel);
-           return findCourierForParcel(parcel);
+            findCourierForParcel(parcel);
 
 
         }
-        return false;
 
     }
 
@@ -110,7 +109,7 @@ public class ParcelService {
         parcelRepository.save(parcel);
     }
 
-    private boolean findCourierForParcel(Parcel parcel) {
+    private void findCourierForParcel(Parcel parcel) {
 
         List<User> activeCouriers = userService.findAll().stream().filter(r -> r.getStatus().equals("READY"))
             .collect(Collectors.toList());
@@ -118,21 +117,6 @@ public class ParcelService {
             map(c -> new CourierWithDistanceToParcel(c.getId(),
                 haversine.distance(c.getLat(), c.getLng(), parcel.getStartLat(), parcel.getStartLng()))).sorted(
             Comparator.comparing(CourierWithDistanceToParcel::getDistance)).collect(Collectors.toList());
-
-        User courier = userService.getUserById(courierWithDistanceToParcels.get(0).getCourierId());
-        User sender = userService.findByPhone(parcel.getStartPhone());
-        User reciver = userService.findByPhone(parcel.getEndPhone());
-        if(activeCouriers.size()==0){
-            androidPushNotificationsService.send(notificationProvider
-                .createNotification(sender.getUsername(), "Parcel not verified", "You have new parcel: start",
-                    new Date().toString() +'\n'+ "Not courier available. Try again"));
-            androidPushNotificationsService.send(notificationProvider
-                .createNotification(reciver.getUsername(), "Parcel not verified", "You have new parcel: start",
-                    new Date().toString() +'\n'+ "Not courier available. Try again"));
-            parcel.setStatus("REJECTED");
-            parcelRepository.save(parcel);
-            return false;
-        }
 
         if (!courierWithDistanceToParcels.isEmpty()) {
 
@@ -152,7 +136,9 @@ public class ParcelService {
             JSONArray ja_data2 = json.getJSONArray("results");
             String endAdress = UserService.stripAccents(ja_data2.getJSONObject(0).getString("formatted_address"));
             parcel.setCourierId(courierWithDistanceToParcels.get(0).getCourierId());
-
+            User courier = userService.getUserById(courierWithDistanceToParcels.get(0).getCourierId());
+            User sender = userService.findByPhone(parcel.getStartPhone());
+            User reciver = userService.findByPhone(parcel.getEndPhone());
             androidPushNotificationsService.send(notificationProvider
                 .createNotification(courier.getUsername(), "New parcel", "You have new parcel: start",
                     "You have new parcel to deliver:" + '\n' + "Start: " + (startAdress) + '\n' + "End: " + endAdress + '\n' + "Sender number: "+ sender.getPhone() ));
@@ -166,9 +152,8 @@ public class ParcelService {
             parcel.setStatus("READY_TO_PICKED_UP");
             parcelRepository.save(parcel);
             userService.update(courier);
-
         }
-        return true;
+
     }
 
     public void confirmPickUp(ParcelPickUpConfirmation parcelPickUpConfirmation) {
