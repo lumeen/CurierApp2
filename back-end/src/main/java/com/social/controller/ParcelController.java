@@ -35,14 +35,6 @@ public class ParcelController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/parcels/byCarId", method = RequestMethod.POST)
-    public List<Parcel> updateParcels(@RequestBody Long carId){
-     return parcelService.findByCarId(carId).stream().sorted(Comparator.comparing(Parcel::getPriority)).collect(
-         Collectors.toList());
-
-    }
-
-    @CrossOrigin
     @RequestMapping(value = "/parcels/getAll", method = RequestMethod.GET)
     public List<Parcel> getAll(){
         return parcelService.getAllParcels();
@@ -59,6 +51,14 @@ public class ParcelController {
         }
          parcelService.createParcel(parcelRequest);
         return ResponseEntity.ok("");
+
+    }
+    
+     @CrossOrigin
+    @RequestMapping(value = "/parcels/byCarId", method = RequestMethod.POST)
+    public List<Parcel> updateParcels(@RequestBody Long carId){
+     return parcelService.findByCarId(carId).stream().sorted(Comparator.comparing(Parcel::getPriority)).collect(
+         Collectors.toList());
 
     }
 
